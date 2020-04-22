@@ -4,8 +4,15 @@ from __future__ import with_statement
 import textwrap
 import warnings
 
+import sys
+import os
+
 import pytest
 from six import PY2, StringIO
+
+
+junitpath = os.path.normpath('../junit_xml')
+sys.path.append(junitpath)
 
 from .asserts import verify_test_case
 from junit_xml import TestCase as Case
@@ -25,6 +32,7 @@ def test_single_suite_no_test_cases():
     package = "mypackage"
     timestamp = 1398382805
 
+    #pylint: disable=unused-variable
     ts, tcs = serialize_and_read(
         Suite(
             name="test",
@@ -59,6 +67,7 @@ def test_single_suite_no_test_cases_utf8():
         package=package,
         timestamp=timestamp,
     )
+    #pylint: disable=unused-variable
     ts, tcs = serialize_and_read(test_suite, to_file=True, prettyprint=True, encoding="utf-8")[0]
     assert ts.tagName == "testsuite"
     assert ts.attributes["package"].value == decode(package, "utf-8")
@@ -72,6 +81,7 @@ def test_single_suite_no_test_cases_unicode():
     package = decode("mypäckage", "utf-8")
     timestamp = 1398382805
 
+    #pylint: disable=unused-variable
     ts, tcs = serialize_and_read(
         Suite(
             name=decode("äöü", "utf-8"),
@@ -94,21 +104,25 @@ def test_single_suite_no_test_cases_unicode():
 
 
 def test_single_suite_to_file():
+    #pylint: disable=unused-variable
     ts, tcs = serialize_and_read(Suite("test", [Case("Test1")]), to_file=True)[0]
     verify_test_case(tcs[0], {"name": "Test1"})
 
 
 def test_single_suite_to_file_prettyprint():
+    #pylint: disable=unused-variable    
     ts, tcs = serialize_and_read(Suite("test", [Case("Test1")]), to_file=True, prettyprint=True)[0]
     verify_test_case(tcs[0], {"name": "Test1"})
 
 
 def test_single_suite_prettyprint():
+    #pylint: disable=unused-variable   
     ts, tcs = serialize_and_read(Suite("test", [Case("Test1")]), to_file=False, prettyprint=True)[0]
     verify_test_case(tcs[0], {"name": "Test1"})
 
 
 def test_single_suite_to_file_no_prettyprint():
+    #pylint: disable=unused-variable   
     ts, tcs = serialize_and_read(Suite("test", [Case("Test1")]), to_file=True, prettyprint=False)[0]
     verify_test_case(tcs[0], {"name": "Test1"})
 
@@ -198,7 +212,7 @@ def test_to_xml_string():
     ]
     xml_string = to_xml_report_string(test_suites)
     if PY2:
-        assert isinstance(xml_string, unicode)  # noqa: F821
+        assert isinstance(xml_string, unicode)  # pylint: disable=undefined-variable
     expected_xml_string = textwrap.dedent(
         """
         <?xml version="1.0" ?>

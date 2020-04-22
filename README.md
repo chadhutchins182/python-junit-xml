@@ -1,14 +1,15 @@
 python-junit-xml
 ================
-[![Build Status](https://travis-ci.org/chadhutchins182/python-junit-xml.svg?branch=master)](https://travis-ci.org/chadhutchins182/python-junit-xml)
+
+[![chadhutchins182](https://circleci.com/gh/chadhutchins182/python-junit-xml.svg?style=shield)](https://app.circleci.com/pipelines/github/chadhutchins182/python-junit-xml)
 
 About
 -----
 
 A Python module for creating JUnit XML test result documents that can be
-read by tools such as Atlassian Bamboo or Jenkins. 
+read by tools such as Atlassian Bamboo or Jenkins.
 
-Code originally forked from: https://github.com/kyrus/python-junit-xml
+Code originally forked from: <https://github.com/kyrus/python-junit-xml>
 read by tools such as Jenkins or Bamboo. If you are ever working with test tool or
 test suite written in Python and want to take advantage of Jenkins' or Bamboo's
 pretty graphs and test reporting capabilities, this module will let you
@@ -25,16 +26,16 @@ Installation
 
 Install using pip or easy_install:
 
-```
+```bash
 
-	pip install junit-xml
-	or
-	easy_install junit-xml
+ pip install junit-xml
+ or
+ easy_install junit-xml
 ```
 
 You can also clone the Git repository from Github and install it manually:
 
-```
+```bash
 
     git clone https://github.com/kyrus/python-junit-xml.git
     python setup.py install
@@ -83,6 +84,7 @@ Writing XML to a file:
         TestSuite.to_file(f, [ts], prettyprint=False)
 
 ```
+
 See the docs and unit tests for more examples.
 
 NOTE: Unicode characters identified as "illegal or discouraged" are automatically
@@ -91,15 +93,10 @@ stripped from the XML string or file.
 Running the tests
 -----------------
 
-```
+```bash
     # activate your virtualenv
-    pip install tox
-    tox
-
-Releasing a new version
------------------------
-
-1. Bump version in `setup.py`
-2. Build distribution with `python setup.py sdist bdist_wheel`
-3. Upload to Pypi with `twine upload dist/*`
-4. Verify the new version was uploaded at https://pypi.org/project/junit-xml/#history
+        pip install coverage
+        pip install pytest
+        pip install six
+        coverage run -m pytest tests
+```
