@@ -27,7 +27,6 @@ Installation
 Install using pip or easy_install:
 
 ```bash
-
  pip install junit-xml
  or
  easy_install junit-xml
@@ -36,7 +35,6 @@ Install using pip or easy_install:
 You can also clone the Git repository from Github and install it manually:
 
 ```bash
-
     git clone https://github.com/kyrus/python-junit-xml.git
     python setup.py install
 ```
@@ -47,7 +45,6 @@ Using
 Create a test suite, add a test case, and print it to the screen:
 
 ```python
-
     from junit_xml import TestSuite, TestCase
 
     test_cases = [TestCase('Test1', 'some.class.name', 123.345, 'I am stdout!', 'I am stderr!')]
@@ -59,7 +56,6 @@ Create a test suite, add a test case, and print it to the screen:
 Produces the following output
 
 ```xml
-
     <?xml version="1.0" ?>
     <testsuites>
         <testsuite errors="0" failures="0" name="my test suite" tests="1">
@@ -78,14 +74,35 @@ Produces the following output
 Writing XML to a file:
 
 ```python
-
     # you can also write the XML to a file and not pretty print it
     with open('output.xml', 'w') as f:
         TestSuite.to_file(f, [ts], prettyprint=False)
 
 ```
 
-See the docs and unit tests for more examples.
+Additional *TestCase* functions
+
+```python
+    def add_stdout(self, stdout=None):
+        """Adds standard out to the test case"""
+
+    def add_stderr(self, stderr=None):
+        """Adds standard error to the test case"""
+
+    def add_error_info(self, message=None, output=None, error_type=None):
+        """Adds an error message, output, or both to the test case"""
+
+    def add_failure_info(self, message=None, output=None, failure_type=None):
+        """Adds a failure message, output, or both to the test case"""
+
+    def add_skipped_info(self, message=None, output=None):
+        """Adds a skipped message, output, or both to the test case"""
+
+    def add_timestamp(self, timestamp=None):
+        """Adds timestamp to the test case. Time is in seconds"""
+```
+
+See the unit tests for more examples.
 
 NOTE: Unicode characters identified as "illegal or discouraged" are automatically
 stripped from the XML string or file.

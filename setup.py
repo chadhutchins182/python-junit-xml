@@ -20,7 +20,7 @@ setup(
     description='Creates JUnit XML test result documents that can be read by '
                 'tools such as Atlassian Bamboo or Jenkins',
     long_description=read('README.md'),
-    version='1.9',
+    version='1.10',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
